@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Ek hi jagah port manage karo taaki baar-baar change na karna pade
 const PORT = 'https://quantitymeasurementapp-production-5687.up.railway.app'; 
-const BASE_URL = `http://localhost:${PORT}/api/v1`;
+const BASE_URL = `${PORT}/api/v1`;
 
 /**
  * Helper function to get token and set headers
@@ -23,7 +23,7 @@ const getConfig = () => {
  * Login API
  */
 export const loginApi = async (email: string, pw: string) => {
-  const response = await axios.post(`http://localhost:${PORT}/auth/user/login`, { 
+  const response = await axios.post(`${PORT}/auth/user/login`, { 
     email: email, 
     password: pw 
   });
@@ -34,7 +34,7 @@ export const loginApi = async (email: string, pw: string) => {
  * Registration API
  */
 export const registerApi = async (name: string, email: string, pw: string, mobile: string) => {
-  const response = await axios.post(`http://localhost:${PORT}/auth/user/register`, { 
+  const response = await axios.post(`${PORT}/auth/user/register`, { 
     username: name,  // Backend expects 'username'
     email: email, 
     password: pw, 
