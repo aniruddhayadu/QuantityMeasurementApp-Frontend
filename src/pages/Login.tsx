@@ -42,10 +42,10 @@ function Login() {
     setTimeout(() => setToastShow(false), 3000);
   }
 
-  const handleGoogleLogin = () => {
-    // Port 8080 match kar lena backend se
-    window.location.href = 'quantitymeasurementapp-production-5687.up.railway.app/oauth2/authorization/google';
-  };
+ const handleGoogleLogin = () => {
+  // ✅ https:// lagana compulsory hai
+  window.location.href = 'https://quantitymeasurementapp-production-5687.up.railway.app/oauth2/authorization/google';
+};
 
   async function doLogin() {
     let valid = true;

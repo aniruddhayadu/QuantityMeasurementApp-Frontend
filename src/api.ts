@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 // Ek hi jagah port manage karo taaki baar-baar change na karna pade
-const PORT = 'https://quantitymeasurementapp-production-5687.up.railway.app'; 
-const BASE_URL = `${PORT}/api/v1`;
+const PORT = 'https://quantitymeasurementapp-production-5687.up.railway.app/'; 
+const BASE_URL = `${PORT}api/v1`;
 
 /**
  * Helper function to get token and set headers
