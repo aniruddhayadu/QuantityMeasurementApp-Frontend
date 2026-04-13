@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { compareApi, convertApi, addApi, subtractApi, multiplyApi, divideApi } from '../api';
+import { compareApi, convertApi, addApi, subtractApi, divideApi } from '../api'; // ✅ multiplyApi removed
 import '../styles/dashboard.css';
 
 const UNITS: Record<string, { label: string, backendUnit: string }[]> = {
@@ -210,7 +210,7 @@ function Dashboard() {
 
     if (arithOp === '+') { apiCall = addApi;      opLabel = '+'; }
     if (arithOp === '-') { apiCall = subtractApi; opLabel = '−'; }
-    if (arithOp === '*') { apiCall = multiplyApi; opLabel = '×'; }
+    // ✅ Multiply check removed
     if (arithOp === '/') { apiCall = divideApi;   opLabel = '÷'; }
 
     apiCall(payload)
@@ -227,7 +227,7 @@ function Dashboard() {
         setArithResult(result);
         addToHistory('[Arithmetic ' + opLabel + '] ' + result);
       })
-      .catch(() => setArithResult('This operation is not supported for the selected temperature unit.'));
+      .catch(() => setArithResult('This operation is not supported.'));
   }
 
   return (
@@ -333,7 +333,7 @@ function Dashboard() {
                 <select value={arithOp} onChange={(e) => setArithOp(e.target.value)}>
                   <option value="+">+</option>
                   <option value="-">−</option>
-                  <option value="*">×</option>
+                  {/* ✅ Multiply option (*) removed from here */}
                   <option value="/">÷</option>
                 </select>
               </div>
