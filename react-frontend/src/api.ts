@@ -1,25 +1,41 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:8080/api/v1';
+// Ek hi jagah port manage karo taaki baar-baar change na karna pade
+const PORT = '8080'; 
+const BASE_URL = `http://localhost:${PORT}/api/v1`;
 
+/**
+ * Helper function to get token and set headers
+ */
 const getConfig = () => {
   const token = localStorage.getItem('qm_token');
-  return { headers: { Authorization: `Bearer ${token}` } };
+  return { 
+    headers: { 
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    } 
+  };
 };
+
 // --- Auth APIs ---
+
+/**
+ * Login API
+ */
 export const loginApi = async (email: string, pw: string) => {
-  // Yahan BASE_URL hata kar direct correct backend URL daala hai
-  const response = await axios.post(`http://localhost:8080/auth/user/login`, { 
+  const response = await axios.post(`http://localhost:${PORT}/auth/user/login`, { 
     email: email, 
     password: pw 
   });
   return response.data;
 };
 
+/**
+ * Registration API
+ */
 export const registerApi = async (name: string, email: string, pw: string, mobile: string) => {
-  // Yahan bhi exact URL daala hai aur 'name' ko 'username' banaya hai
-  const response = await axios.post(`http://localhost:8080/auth/user/register`, { 
-    username: name,  // <-- Ye sabse zaroori change hai!
+  const response = await axios.post(`http://localhost:${PORT}/auth/user/register`, { 
+    username: name,  // Backend expects 'username'
     email: email, 
     password: pw, 
     mobile: mobile 
@@ -27,7 +43,8 @@ export const registerApi = async (name: string, email: string, pw: string, mobil
   return response.data;
 };
 
-// Quantity APIs
+// --- Quantity Operations APIs ---
+
 export const compareApi = async (payload: any) => {
   const response = await axios.post(`${BASE_URL}/quantities/compare`, payload, getConfig());
   return response.data;
