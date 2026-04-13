@@ -44,7 +44,7 @@ function Login() {
 
   const handleGoogleLogin = () => {
     // Port 8080 match kar lena backend se
-    window.location.href = 'http://localhost:8080/oauth2/authorization/google';
+    window.location.href = 'quantitymeasurementapp-production-5687.up.railway.app/oauth2/authorization/google';
   };
 
   async function doLogin() {

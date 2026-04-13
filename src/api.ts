@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Ek hi jagah port manage karo taaki baar-baar change na karna pade
-const PORT = '8080'; 
+const PORT = 'quantitymeasurementapp-production-5687.up.railway.app'; 
 const BASE_URL = `http://localhost:${PORT}/api/v1`;
 
 /**
