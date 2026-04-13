@@ -30,7 +30,6 @@ function Login() {
   const [signupMobileErr, setSignupMobileErr] = useState(false);
   
   const [showLoginPw, setShowLoginPw] = useState(false);
-  const [showSignupPw, setShowSignupPw] = useState(false);
 
   function isValidEmail(email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -44,7 +43,7 @@ function Login() {
   }
 
   const handleGoogleLogin = () => {
-    // Ye seedha backend ke OAuth2 endpoint par bhejega
+    // Port 8080 match kar lena backend se
     window.location.href = 'http://localhost:8080/oauth2/authorization/google';
   };
 
@@ -68,10 +67,10 @@ function Login() {
 
   async function doSignup() {
     let valid = true;
-    if (!signupName) { setSignupNameErr(true); valid = false; }
-    if (!isValidEmail(signupEmail)) { setSignupEmailErr(true); valid = false; }
-    if (!PASSWORD_REGEX.test(signupPw)) { setSignupPwErr(true); valid = false; }
-    if (!/^\d{10}$/.test(signupMobile)) { setSignupMobileErr(true); valid = false; }
+    if (!signupName) { setSignupNameErr(true); valid = false; } else { setSignupNameErr(false); }
+    if (!isValidEmail(signupEmail)) { setSignupEmailErr(true); valid = false; } else { setSignupEmailErr(false); }
+    if (!PASSWORD_REGEX.test(signupPw)) { setSignupPwErr(true); valid = false; } else { setSignupPwErr(false); }
+    if (!/^\d{10}$/.test(signupMobile)) { setSignupMobileErr(true); valid = false; } else { setSignupMobileErr(false); }
 
     if (valid) {
       try {
@@ -88,7 +87,6 @@ function Login() {
     <div className="auth-wrapper">
       <div className="card">
         <div className="brand">
-          {/* SVG Code same rahega */}
           <svg className="brand-icon" viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg">
             <rect x="28" y="0" width="24" height="12" rx="4" fill="#5dade2"/>
             <rect x="30" y="12" width="20" height="14" rx="2" fill="#85c1e9"/>
@@ -112,9 +110,12 @@ function Login() {
                 <label>Email Id</label>
                 <input type="email" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} className={loginEmailErr ? 'error' : ''}/>
               </div>
-              <div className="field">
+              <div className="field" style={{position: 'relative'}}>
                 <label>Password</label>
                 <input type={showLoginPw ? 'text' : 'password'} value={loginPw} onChange={(e) => setLoginPw(e.target.value)} className={loginPwErr ? 'error' : ''}/>
+                <span style={{position:'absolute', right:'10px', top:'35px', cursor:'pointer', fontSize:'12px'}} onClick={() => setShowLoginPw(!showLoginPw)}>
+                  {showLoginPw ? '👁️' : '🙈'}
+                </span>
               </div>
               <button className="btn-submit" onClick={doLogin}>Login</button>
               
@@ -128,19 +129,19 @@ function Login() {
             <div className="form-panel active">
                <div className="field">
                 <label>Full Name</label>
-                <input type="text" value={signupName} onChange={(e) => setSignupName(e.target.value)} />
+                <input type="text" value={signupName} onChange={(e) => setSignupName(e.target.value)} className={signupNameErr ? 'error' : ''} />
               </div>
               <div className="field">
                 <label>Email Id</label>
-                <input type="email" value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)} />
+                <input type="email" value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)} className={signupEmailErr ? 'error' : ''} />
               </div>
               <div className="field">
                 <label>Password</label>
-                <input type="password" value={signupPw} onChange={(e) => setSignupPw(e.target.value)} />
+                <input type="password" value={signupPw} onChange={(e) => setSignupPw(e.target.value)} className={signupPwErr ? 'error' : ''} />
               </div>
               <div className="field">
                 <label>Mobile</label>
-                <input type="tel" value={signupMobile} onChange={(e) => setSignupMobile(e.target.value)} />
+                <input type="tel" value={signupMobile} onChange={(e) => setSignupMobile(e.target.value)} className={signupMobileErr ? 'error' : ''} />
               </div>
               <button className="btn-submit" onClick={doSignup}>Signup</button>
             </div>
