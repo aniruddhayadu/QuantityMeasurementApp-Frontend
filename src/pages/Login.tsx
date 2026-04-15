@@ -43,8 +43,7 @@ function Login() {
   }
 
  const handleGoogleLogin = () => {
-  // ✅ https:// lagana compulsory hai
-  window.location.href = 'https://quantitymeasurementapp-production-5687.up.railway.app/oauth2/authorization/google';
+  window.location.href = 'http://localhost:8080/oauth2/authorization/google';
 };
 
   async function doLogin() {

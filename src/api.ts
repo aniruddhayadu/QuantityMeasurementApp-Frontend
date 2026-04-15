@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-// Ek hi jagah port manage karo taaki baar-baar change na karna pade
-const PORT = 'https://quantitymeasurementapp-production-5687.up.railway.app/'; 
-const BASE_URL = `${PORT}api/v1`;
+//Localhost 
+const PORT = 'http://localhost:8080';
+
+const BASE_URL = `${PORT}/api/v1`;
 
 /**
  * Helper function to get token and set headers
@@ -23,6 +24,7 @@ const getConfig = () => {
  * Login API
  */
 export const loginApi = async (email: string, pw: string) => {
+  // ✅ Yahan check karo: path '/auth/user/login' se shuru ho
   const response = await axios.post(`${PORT}/auth/user/login`, { 
     email: email, 
     password: pw 
