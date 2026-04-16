@@ -42,8 +42,8 @@ function Login() {
     setTimeout(() => setToastShow(false), 3000);
   }
 
- const handleGoogleLogin = () => {
-  window.location.href = 'http://localhost:8080/oauth2/authorization/google';
+  const handleGoogleLogin = () => {
+  window.location.href = 'https://quantitymeasurementapp-production-16d3.up.railway.app/oauth2/authorization/google';
 };
 
   async function doLogin() {
