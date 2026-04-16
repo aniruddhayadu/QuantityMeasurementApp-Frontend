@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // ✅ useEffect add kiya
 import { useNavigate } from 'react-router-dom';
 import Toast from '../components/Toast';
 import { loginApi, registerApi } from '../api';
@@ -31,6 +31,21 @@ function Login() {
   
   const [showLoginPw, setShowLoginPw] = useState(false);
 
+  // Login.tsx ke andar
+useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+
+    if (token) {
+        console.log("Token pakad liya bhai!");
+        localStorage.setItem('qm_token', token);
+        localStorage.setItem('qm_user', 'Google User');
+        
+        // navigate ki jagah ye use kar, ye makkhan chalega
+        window.location.replace("/dashboard"); 
+    }
+}, []);
+
   function isValidEmail(email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
@@ -42,9 +57,10 @@ function Login() {
     setTimeout(() => setToastShow(false), 3000);
   }
 
- const handleGoogleLogin = () => {
-  window.location.href = `${process.env.REACT_APP_API_URL}/oauth2/authorization/google`;
-};
+  const handleGoogleLogin = () => {
+    // Backend trigger
+    window.location.href = "http://localhost:8080/oauth2/authorization/google";
+  };
 
   async function doLogin() {
     let valid = true;
